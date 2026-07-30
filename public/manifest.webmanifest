@@ -1,13 +1,10 @@
 {
   "name": "FitFKR",
   "short_name": "FitFKR",
-  "description": "Your customizable workout, progress, recovery, and fitness toolkit.",
+  "description": "A personal workout, progress, recovery and fitness calculator app.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#101116",
-  "theme_color": "#f29ab2",
-  "icons": [
-    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
-  ]
+  "background_color": "#16111d",
+  "theme_color": "#e86aa7",
+  "icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
 }

@@ -1,63 +1,77 @@
-# FitFKR Complete
+# FitFKR
 
-FitFKR is a private-by-default workout, progress, recovery, and fitness toolkit. This cumulative build includes the current four-day program and the customization and utilities requested across earlier versions.
+FitFKR is a private-by-default fitness PWA for workout logging, progress, recovery, and common fitness calculations. It is a standard React + TypeScript + Vite project with no Cloudflare, Wrangler, vinext, or OpenAI hosting dependency.
 
 ## Included
 
-- Editable, reorderable, duplicable, archivable workout plans
-- Paste-to-import workout parser
-- Per-set weight, rep, and completion logging
-- Rest timer notifications, vibration, and timestamp recovery after backgrounding
-- Workout history, volume chart, body weight, and measurements
-- Recovery habits, daily score, and muscle-readiness overview
-- Measurement-only vial and syringe converter, plate calculator, estimated 1RM, and macro starting point
-- Twelve themes, eight font choices, custom accent color, and text sizing
-- Local storage, JSON backup and restore, installable PWA, and offline cache
+- Fully editable, reorderable, duplicable, archivable, restorable and resettable workouts
+- Exercise add/delete/reorder, notes, substitutions, set/rep targets and cardio finishers
+- Plain-text multi-workout importer
+- Per-set weight and rep tracking, previous-session values and progressive-overload prompts
+- Detailed workout history, calendar, volume and per-exercise personal records
+- Timestamp-based rest/cardio timers with notifications, selectable sounds and vibration
+- Body-weight graphs, complete measurements and retained front/side/back progress-photo timeline
+- Recovery habits, daily score, history and muscle-group recovery display
+- 1RM, plate, macro, vial-measurement, medication-volume and unit-conversion calculators
+- 12 themes, feminine and rounded fonts, custom accent, icon style and text sizing
+- Local JSON backup and restore
+- Installable offline PWA
 
-> The vial tool performs arithmetic from user-entered values. It does not recommend medications or doses and is not medical advice.
+All app records are stored in the browser on the current device. Export a backup regularly. Progress-photo file contents are intentionally not placed in JSON backups.
 
-## Requirements
+## Local setup
 
-- Node.js 22.13 or later
-- npm 10 or later
-
-## Install and run
-
-```bash
-npm install
-npm run dev
-```
-
-Open the local address printed in the terminal.
-
-## Production build
+Use Node 22.14 (the pinned version in `.nvmrc`).
 
 ```bash
-npm run build
+pnpm install
+pnpm run dev
 ```
 
-The validated production output is written to `dist/`.
+Production verification:
 
-## GitHub
+```bash
+pnpm run build
+pnpm run preview
+```
 
-1. Create a new repository such as `fitfkr`.
-2. Upload this project or push it with Git.
-3. Run `npm install` and `npm run build` in your deployment environment.
+The production output is `dist/`.
 
-The project is prepared for the OpenAI Sites/Cloudflare runtime. If deploying elsewhere, use a host that supports the generated worker output in `dist/`.
+## Upload to GitHub
 
-## Privacy
+1. Create a new empty GitHub repository.
+2. Extract this ZIP.
+3. Upload all extracted files, including dotfiles such as `.nvmrc` and `.gitignore`.
+4. Commit them to the `main` branch.
 
-Workout and wellness data are stored in the browser on the current device. Use **Settings → Export backup** before clearing browser storage or moving devices.
+Or from a terminal:
 
-## Project structure
+```bash
+git init
+git add .
+git commit -m "Initial FitFKR release"
+git branch -M main
+git remote add origin YOUR_REPOSITORY_URL
+git push -u origin main
+```
 
-- `app/` — React/TypeScript application and design
-- `public/` — PWA manifest, service worker, and icons
-- `worker/` — server entrypoint
-- `tests/` — build verification
-- `.openai/hosting.json` — Sites configuration
+## Deploy with Vercel
 
-## License
+1. In Vercel, choose **Add New → Project**.
+2. Import the GitHub repository.
+3. Vercel should detect **Vite** automatically.
+4. Keep these settings:
+   - Install command: `pnpm install --frozen-lockfile`
+   - Build command: `pnpm run build`
+   - Output directory: `dist`
+5. Deploy.
 
-Private project. Add your preferred license before distributing publicly.
+`vercel.json` already provides the single-page-app rewrite. No environment variables are required.
+
+## GitHub Pages
+
+Vercel is the simplest deployment target for this project. For a project-level GitHub Pages URL, set `base` in `vite.config.ts` to `"/YOUR_REPOSITORY_NAME/"` and ensure the PWA paths use the same base before deploying `dist/`.
+
+## Health calculator note
+
+The vial tool performs concentration and volume arithmetic only. It does not recommend substances, doses, protocols, or treatment. Verify any medication-related measurements with a licensed clinician or pharmacist.
