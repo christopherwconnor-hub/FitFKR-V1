@@ -1,77 +1,96 @@
 # FitFKR
 
-FitFKR is a private-by-default fitness PWA for workout logging, progress, recovery, and common fitness calculations. It is a standard React + TypeScript + Vite project with no Cloudflare, Wrangler, vinext, or OpenAI hosting dependency.
+This is the protected continuation project for the FitFKR version selected on July 30, 2026. Its current structure, navigation, visual language, themes, mobile layout, and core behavior are the approved baseline.
 
-## Included
+Future improvements should be small and additive. Read `PROJECT-GUARDRAILS.md` before changing the interface.
 
-- Fully editable, reorderable, duplicable, archivable, restorable and resettable workouts
-- Exercise add/delete/reorder, notes, substitutions, set/rep targets and cardio finishers
-- Plain-text multi-workout importer
-- Per-set weight and rep tracking, previous-session values and progressive-overload prompts
-- Detailed workout history, calendar, volume and per-exercise personal records
-- Timestamp-based rest/cardio timers with notifications, selectable sounds and vibration
-- Body-weight graphs, complete measurements and retained front/side/back progress-photo timeline
-- Recovery habits, daily score, history and muscle-group recovery display
-- 1RM, plate, macro, vial-measurement, medication-volume and unit-conversion calculators
-- 12 themes, feminine and rounded fonts, custom accent, icon style and text sizing
-- Local JSON backup and restore
-- Installable offline PWA
+A polished, mobile-first React + TypeScript workout tracker built around a precise six-day training plan. FitFKR runs entirely in the browser and stores workout logs, history, weight entries, progress photos, and theme preferences on the device.
 
-All app records are stored in the browser on the current device. Export a backup regularly. Progress-photo file contents are intentionally not placed in JSON backups.
+## Features
 
-## Local setup
+- Monday–Saturday plan with every prescribed set, rep, time, and finisher
+- Per-set weight, rep/time, and completion logging
+- Previous-session awareness and progressive-overload prompts
+- Exercise-specific next-weight suggestions after every prescribed set and rep is completed
+- Automatic session volume and PR tracking
+- Rest timer and cardio finisher timer
+- Recovery-day checklist
+- Body-weight trend chart
+- On-device progress photo timeline
+- Workout history, weekly completion, and streaks
+- Motivational workout-completion celebration and six consistency achievements
+- Dark/light themes
+- Three selectable themes, including the pink-and-white Blush Studio theme
+- Three selectable typography styles, including Soft Serif and Soft Rounded feminine options
+- Plain-text workout plan importing with saved plan selection
+- In-app workout plan editing, with editable custom copies of the built-in plan
+- Copy-and-paste workout plan creation with starting-weight recognition
+- Rest-between-sets timer with 30, 60, 90, and 120-second presets
+- Installable PWA with offline caching
+- Responsive desktop and mobile interface
+- Automatic Rest & Recovery dashboard when the active plan has no workout scheduled today
+- Device-local peptide prescription schedule with selectable days and prescribed mg/unit fields
+- U-100 syringe concentration converter for vial mg and BAC-water volume
+- FDA-status and safety labels for commonly marketed peptides, with no dose recommendations
 
-Use Node 22.14 (the pinned version in `.nvmrc`).
+## Run locally
 
-```bash
-pnpm install
-pnpm run dev
-```
-
-Production verification:
-
-```bash
-pnpm run build
-pnpm run preview
-```
-
-The production output is `dist/`.
-
-## Upload to GitHub
-
-1. Create a new empty GitHub repository.
-2. Extract this ZIP.
-3. Upload all extracted files, including dotfiles such as `.nvmrc` and `.gitignore`.
-4. Commit them to the `main` branch.
-
-Or from a terminal:
+Requirements: Node.js 22.13 or newer.
 
 ```bash
-git init
-git add .
-git commit -m "Initial FitFKR release"
-git branch -M main
-git remote add origin YOUR_REPOSITORY_URL
-git push -u origin main
+npm install
+npm run dev
 ```
 
-## Deploy with Vercel
+Open `http://localhost:3000`.
 
-1. In Vercel, choose **Add New → Project**.
-2. Import the GitHub repository.
-3. Vercel should detect **Vite** automatically.
-4. Keep these settings:
-   - Install command: `pnpm install --frozen-lockfile`
-   - Build command: `pnpm run build`
-   - Output directory: `dist`
-5. Deploy.
+## Production build
 
-`vercel.json` already provides the single-page-app rewrite. No environment variables are required.
+```bash
+npm run build
+```
 
-## GitHub Pages
+## Deploy to GitHub Pages
 
-Vercel is the simplest deployment target for this project. For a project-level GitHub Pages URL, set `base` in `vite.config.ts` to `"/YOUR_REPOSITORY_NAME/"` and ensure the PWA paths use the same base before deploying `dist/`.
+This starter uses a Cloudflare-compatible Next.js runtime for its hosted preview. For GitHub Pages, the simplest route is GitHub Actions:
 
-## Health calculator note
+1. Create a new GitHub repository and upload this project.
+2. In the repository, open **Settings → Pages**.
+3. Under **Build and deployment**, choose **GitHub Actions**.
+4. Add a static-export workflow and configure the project for static export, or deploy the project with a Next.js-compatible GitHub Pages action.
 
-The vial tool performs concentration and volume arithmetic only. It does not recommend substances, doses, protocols, or treatment. Verify any medication-related measurements with a licensed clinician or pharmacist.
+Because all user data is stored locally in the browser, no database or environment variables are required. If you prefer a one-click host with no configuration changes, the same project can be deployed directly to Cloudflare, Vercel, or Netlify.
+
+## Privacy
+
+FitFKR has no accounts, analytics, or remote database. Training data, peptide schedules, and compressed progress photos remain in the current browser’s local storage. Clearing browser data also clears saved app data.
+
+## Peptide schedule safety
+
+The peptide tab is a private recordkeeping and arithmetic tool, not medical advice. It does not recommend a peptide, dose, frequency, route, diluent, or treatment. The concentration converter assumes a U-100 syringe, where 100 syringe units equal 1 mL, and should be checked against the medication label by a licensed prescriber or dispensing pharmacist before use.
+
+## Importing workout plans
+
+Open **Plans & themes**, then choose a `.txt` file. Format day headings and exercises like this:
+
+```text
+Monday – Arms & Abs
+
+Hammer Curl – 3 × 12
+Cable Crunch – 3 × 15
+
+Finish:
+
+15–20 minutes incline treadmill
+```
+
+The importer supports Monday through Sunday, parenthetical day notes, recovery checklist items without set counts, `×` or `x` set notation, and cardio finishers. Imported schedules are stored on the current device and appear in the workout-plan selector.
+
+You can also paste the same format directly into **Plans & themes → Paste & Build**. Starting weights are optional:
+
+```text
+Shoulder Press – 3 × 10 @ 25 lb
+Cable Row – 3 × 12, 40 lb
+```
+
+When a starting weight is included, it is prefilled in every set and can still be edited during the workout.

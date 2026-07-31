@@ -1,10 +1,12 @@
 {
-  "name": "FitFKR",
+  "name": "FitFKR Workout Tracker",
   "short_name": "FitFKR",
-  "description": "A personal workout, progress, recovery and fitness calculator app.",
+  "description": "Your premium six-day workout tracker.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#16111d",
-  "theme_color": "#e86aa7",
-  "icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+  "background_color": "#06080b",
+  "theme_color": "#06080b",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
 }
